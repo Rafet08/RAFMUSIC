@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RAFMUSIC</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at top, #292929 0%, #111 45%, #080808 100%);
+    color: #fff;
+    min-height: 100vh;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    width: 100%;
+    padding: 22px 6%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
+
+    background: rgba(10,10,10,.75);
+
+    backdrop-filter: blur(15px);
+
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #c9a227;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: #ccc;
+    text-decoration: none;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: #c9a227;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 75vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 60px 20px;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 1100px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 60px;
+
+    align-items: center;
+}
+
+
+/* =========================
+   ALBUM
+========================= */
+
+.album {
+    display: flex;
+    justify-content: center;
+}
+
+.album-cover {
+    width: min(430px, 80vw);
+
+    aspect-ratio: 1 / 1;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(201,162,39,.9),
+            rgba(60,40,5,.8)
+        );
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,.7),
+        inset 0 0 60px rgba(255,255,255,.05);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.album-cover::before {
+
+    content: "";
+
+    width: 65%;
+    height: 65%;
+
+    border-radius: 50%;
+
+    background:
+        repeating-radial-gradient(
+            circle,
+            #111 0px,
+            #111 3px,
+            #222 4px,
+            #111 7px
+        );
+
+    box-shadow:
+        0 0 30px rgba(0,0,0,.8);
+
+    animation:
+        rotate 10s linear infinite;
+}
+
+.album-center {
+
+    position: absolute;
+
+    width: 80px;
+    height: 80px;
+
+    background: #c9a227;
+
+    border-radius: 50%;
+
+    border: 10px solid #111;
+}
+
+@keyframes rotate {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.hero-text h1 {
+
+    font-family: Georgia, serif;
+
+    font-size:
+        clamp(45px, 6vw, 80px);
+
+    margin-bottom: 15px;
+}
+
+.hero-text h1 span {
+
+    color: #c9a227;
+}
+
+.subtitle {
+
+    color: #aaa;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   PLAYER
+========================= */
+
+.player {
+
+    background:
+        rgba(255,255,255,.05);
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    backdrop-filter: blur(15px);
+}
+
+.current-song {
+
+    margin-bottom: 18px;
+}
+
+.current-song h3 {
+
+    font-size: 19px;
+
+    margin-bottom: 5px;
+}
+
+.current-song p {
+
+    color: #999;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.control-btn {
+
+    width: 45px;
+    height: 45px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #292929;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: .25s;
+}
+
+.control-btn:hover {
+
+    background: #c9a227;
+
+    color: #111;
+
+    transform: scale(1.06);
+}
+
+.play-btn {
+
+    width: 58px;
+    height: 58px;
+
+    background: #c9a227;
+
+    color: #111;
+
+    font-size: 22px;
+}
+
+.play-btn:hover {
+
+    background: #e1bd45;
+}
+
+
+/* =========================
+   VOLUME
+========================= */
+
+.volume {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-left: auto;
+}
+
+.volume input {
+
+    width: 90px;
+
+    accent-color: #c9a227;
+}
+
+
+/* =========================
+   MUSIC SECTION
+========================= */
+
+.music-section {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 70px 20px;
+}
+
+.section-title {
+
+    font-family: Georgia, serif;
+
+    font-size: 38px;
+
+    margin-bottom: 30px;
+}
+
+.section-title span {
+
+    color: #c9a227;
+}
+
+
+/* =========================
+   TRACK LIST
+========================= */
+
+.track-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.track {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 17px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid rgba(255,255,255,.06);
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.track:hover {
+
+    background:
+        rgba(201,162,39,.1);
+
+    border-color:
+        rgba(201,162,39,.35);
+
+    transform:
+        translateX(5px);
+}
+
+.track.active {
+
+    background:
+        rgba(201,162,39,.12);
+
+    border-color:
+        rgba(201,162,39,.5);
+}
+
+.track-number {
+
+    width: 35px;
+
+    color: #777;
+
+    text-align: center;
+}
+
+.track-info {
+
+    flex: 1;
+}
+
+.track-info h3 {
+
+    font-size: 16px;
+
+    margin-bottom: 5px;
+}
+
+.track-info p {
+
+    color: #888;
+
+    font-size: 13px;
+}
+
+.track-play {
+
+    color: #c9a227;
+
+    font-size: 20px;
+}
+
+
+/* =========================
+   YOUTUBE
+========================= */
+
+.youtube-container {
+
+    position: fixed;
+
+    width: 1px;
+    height: 1px;
+
+    left: -100px;
+    top: -100px;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
+
+    color: #666;
+
+    margin-top: 50px;
+}
+
+footer span {
+
+    color: #c9a227;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    header {
+
+        padding: 18px 20px;
+    }
+
+    nav {
+
+        display: none;
+    }
+
+    .hero {
+
+        min-height: auto;
+
+        padding:
+            40px 20px 60px;
+    }
+
+    .hero-content {
+
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+
+        text-align: center;
+    }
+
+    .album-cover {
+
+        width: 300px;
+    }
+
+    .hero-text h1 {
+
+        font-size: 48px;
+    }
+
+    .subtitle {
+
+        font-size: 16px;
+    }
+
+    .controls {
+
+        justify-content: center;
+    }
+
+    .volume {
+
+        display: none;
+    }
+
+    .music-section {
+
+        padding:
+            50px 15px;
+    }
+
+    .section-title {
+
+        font-size: 32px;
+    }
+
+    .track {
+
+        padding:
+            15px 12px;
+    }
+
+    .track-number {
+
+        width: 25px;
+    }
+
+}
+
+
+/* =========================
+   SMALL PHONE
+========================= */
+
+@media (max-width: 420px) {
+
+    .logo {
+
+        font-size: 20px;
+    }
+
+    .album-cover {
+
+        width: 260px;
+    }
+
+    .hero-text h1 {
+
+        font-size: 40px;
+    }
+
+    .player {
+
+        padding: 15px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+
+        RAF<span>MUSIC</span>
+
+    </div>
+
+
+    <nav>
+
+        <a href="#home">
+            Главная
+        </a>
+
+        <a href="#music">
+            Музыка
+        </a>
+
+        <a href="#about">
+            О сайте
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section
+    class="hero"
+    id="home">
+
+    <div class="hero-content">
+
+
+        <div class="album">
+
+            <div class="album-cover">
+
+                <div class="album-center"></div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="hero-text">
+
+            <h1>
+
+                RAF<span>MUSIC</span>
+
+            </h1>
+
+
+            <p class="subtitle">
+
+                Твоя музыка.
+                Твоё настроение.
+                Твой RAFMUSIC.
+
+            </p>
+
+
+
+            <!-- PLAYER -->
+
+            <div class="player">
+
+
+                <div class="current-song">
+
+                    <h3 id="songTitle">
+
+                        Выберите композицию
+
+                    </h3>
+
+
+                    <p id="songArtist">
+
+                        RAFMUSIC
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="controls">
+
+
+                    <button
+                        class="control-btn"
+                        onclick="previousSong()">
+
+                        ⏮
+
+                    </button>
+
+
+
+                    <button
+                        class="control-btn play-btn"
+                        id="playButton"
+                        onclick="toggleMusic()">
+
+                        ▶
+
+                    </button>
+
+
+
+                    <button
+                        class="control-btn"
+                        onclick="nextSong()">
+
+                        ⏭
+
+                    </button>
+
+
+
+                    <div class="volume">
+
+                        🔊
+
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value="80"
+                            id="volume">
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     MUSIC
+========================= -->
+
+<section
+    class="music-section"
+    id="music">
+
+
+    <h2 class="section-title">
+
+        Мой <span>плейлист</span>
+
+    </h2>
+
+
+
+    <div
+        class="track-list"
+        id="trackList">
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section
+    class="music-section"
+    id="about">
+
+
+    <h2 class="section-title">
+
+        О <span>RAFMUSIC</span>
+
+    </h2>
+
+
+    <p class="subtitle">
+
+        Добро пожаловать на RAFMUSIC —
+        персональный музыкальный сайт.
+
+        Выбирай любимую композицию,
+        нажимай Play и слушай музыку.
+
+        Музыкальные видео воспроизводятся
+        через YouTube.
+
+    </p>
+
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    © 2026
+    <span>RAFMUSIC</span>
+
+</footer>
+
+
+
+<!-- =========================
+     YOUTUBE PLAYER
+========================= -->
+
+<div class="youtube-container">
+
+    <div id="youtubePlayer"></div>
+
+</div>
+
+
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+
+<script>
+
+/*
+====================================================
+RAFMUSIC
+СПИСОК ПЕСЕН
+====================================================
+
+Здесь ты в будущем можешь добавлять новые песни.
+
+title  = название песни
+artist = исполнитель
+id     = ID видео YouTube
+
+====================================================
+*/
+
+
+const songs = [
+
+    {
+        title: "Песня 1",
+        artist: "Исполнитель 1",
+        id: "iZFmTmEMAXM"
+    },
+
+    {
+        title: "Песня 2",
+        artist: "Исполнитель 2",
+        id: "q_wx_C3ps5U"
+    },
+
+    {
+        title: "Песня 3",
+        artist: "Исполнитель 3",
+        id: "M8HDSFhvRJE"
+    },
+
+    {
+        title: "Песня 4",
+        artist: "Исполнитель 4",
+        id: "82PsUyCKuUc"
+    },
+
+    {
+        title: "Песня 5",
+        artist: "Исполнитель 5",
+        id: "Ntzm0uhK6Ro"
+    },
+
+    {
+        title: "Песня 6",
+        artist: "Исполнитель 6",
+        id: "1T1S6aLEc0A"
+    },
+
+    {
+        title: "Песня 7",
+        artist: "Исполнитель 7",
+        id: "UoXcADETATI"
+    },
+
+    {
+        title: "Песня 8",
+        artist: "Исполнитель 8",
+        id: "SiChGVvYPRg"
+    },
+
+    {
+        title: "Песня 9",
+        artist: "Исполнитель 9",
+        id: "Acl5U6LxJOI"
+    },
+
+    {
+        title: "Песня 10",
+        artist: "Исполнитель 10",
+        id: "Y2J3tFW3Lsw"
+    },
+
+    {
+        title: "Песня 11",
+        artist: "Исполнитель 11",
+        id: "QN_vER9i57M"
+    },
+
+    {
+        title: "Песня 12",
+        artist: "Исполнитель 12",
+        id: "QzRUdsk-_rs"
+    },
+
+    {
+        title: "Песня 13",
+        artist: "Исполнитель 13",
+        id: "CG_1ygj6yUM"
+    },
+
+    {
+        title: "Песня 14",
+        artist: "Исполнитель 14",
+        id: "HanF7puZAEA"
+    },
+
+    {
+        title: "Песня 15",
+        artist: "Исполнитель 15",
+        id: "csrtsi6z3B8"
+    },
+
+    {
+        title: "Песня 16",
+        artist: "Исполнитель 16",
+        id: "dWgtUNtHvDs"
+    },
+
+    {
+        title: "Песня 17",
+        artist: "Исполнитель 17",
+        id: "SQE7BaJ8FTE"
+    },
+
+    {
+        title: "Песня 18",
+        artist: "Исполнитель 18",
+        id: "dcS0zqAS2Oo"
+    },
+
+    {
+        title: "Песня 19",
+        artist: "Исполнитель 19",
+        id: "lQQgA7wtW-c"
+    },
+
+    {
+        title: "Песня 20",
+        artist: "Исполнитель 20",
+        id: "jZSyZKAYX10"
+    }
+
+];
+
+
+
+/*
+====================================================
+ПЕРЕМЕННЫЕ
+====================================================
+*/
+
+
+let currentSong = 0;
+
+let player = null;
+
+let isPlaying = false;
+
+
+
+/*
+====================================================
+СОЗДАНИЕ СПИСКА ПЕСЕН
+====================================================
+*/
+
+
+function createTrackList() {
+
+    const list =
+        document.getElementById(
+            "trackList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    songs.forEach(
+        function(song, index) {
+
+
+            const track =
+                document.createElement(
+                    "div"
+                );
+
+
+            track.className =
+                "track";
+
+
+            track.id =
+                "track-" + index;
+
+
+            track.onclick =
+                function() {
+
+                    selectSong(index);
+
+                };
+
+
+            track.innerHTML = `
+
+                <div class="track-number">
+
+                    ${String(index + 1).padStart(2, "0")}
+
+                </div>
+
+
+                <div class="track-info">
+
+                    <h3>
+
+                        ${song.title}
+
+                    </h3>
+
+
+                    <p>
+
+                        ${song.artist}
+
+                    </p>
+
+                </div>
+
+
+                <div class="track-play">
+
+                    ▶
+
+                </div>
+
+            `;
+
+
+            list.appendChild(track);
+
+        }
+    );
+
+}
+
+
+
+/*
+====================================================
+YOUTUBE API
+====================================================
+*/
+
+
+function onYouTubeIframeAPIReady() {
+
+
+    player =
+        new YT.Player(
+            "youtubePlayer",
+            {
+
+                height: "1",
+
+                width: "1",
+
+                videoId:
+                    songs[0].id,
+
+                playerVars: {
+
+                    autoplay: 0,
+
+                    controls: 0,
+
+                    rel: 0,
+
+                    modestbranding: 1,
+
+                    playsinline: 1
+
+                },
+
+
+                events: {
+
+                    onStateChange:
+                        onPlayerStateChange
+
+                }
+
+            }
+        );
+
+}
+
+
+
+/*
+====================================================
+PLAY / PAUSE
+====================================================
+*/
+
+
+function toggleMusic() {
+
+
+    if (!player) {
+
+        return;
+
+    }
+
+
+    if (isPlaying) {
+
+        player.pauseVideo();
+
+    }
+
+    else {
+
+        player.playVideo();
+
+    }
+
+}
+
+
+
+/*
+====================================================
+PLAYER STATE
+====================================================
+*/
+
+
+function onPlayerStateChange(event) {
+
+
+    if (
+        event.data ===
+        YT.PlayerState.PLAYING
+    ) {
+
+
+        isPlaying = true;
+
+
+        document
+            .getElementById(
+                "playButton"
+            )
+            .textContent = "⏸";
+
+
+        updateActiveTrack();
+
+
+    }
+
+
+    else if (
+        event.data ===
+        YT.PlayerState.ENDED
+    ) {
+
+
+        isPlaying = false;
+
+
+        nextSong();
+
+
+    }
+
+
+    else {
+
+
+        isPlaying = false;
+
+
+        document
+            .getElementById(
+                "playButton"
+            )
+            .textContent = "▶";
+
+    }
+
+}
+
+
+
+/*
+====================================================
+SELECT SONG
+====================================================
+*/
+
+
+function selectSong(index) {
+
+
+    currentSong = index;
+
+
+    const song =
+        songs[currentSong];
+
+
+    document
+        .getElementById(
+            "songTitle"
+        )
+        .textContent =
+            song.title;
+
+
+    document
+        .getElementById(
+            "songArtist"
+        )
+        .textContent =
+            song.artist;
+
+
+    updateActiveTrack();
+
+
+    if (player) {
+
+
+        player.loadVideoById(
+            song.id
+        );
+
+
+        player.playVideo();
+
+
+    }
+
+}
+
+
+
+/*
+====================================================
+NEXT
+====================================================
+*/
+
+
+function nextSong() {
+
+
+    currentSong++;
+
+
+    if (
+        currentSong >=
+        songs.length
+    ) {
+
+        currentSong = 0;
+
+    }
+
+
+    selectSong(
+        currentSong
+    );
+
+}
+
+
+
+/*
+====================================================
+PREVIOUS
+====================================================
+*/
+
+
+function previousSong() {
+
+
+    currentSong--;
+
+
+    if (
+        currentSong < 0
+    ) {
+
+        currentSong =
+            songs.length - 1;
+
+    }
+
+
+    selectSong(
+        currentSong
+    );
+
+}
+
+
+
+/*
+====================================================
+ACTIVE TRACK
+====================================================
+*/
+
+
+function updateActiveTrack() {
+
+
+    document
+        .querySelectorAll(
+            ".track"
+        )
+        .forEach(
+            function(track) {
+
+                track.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    const active =
+        document.getElementById(
+            "track-" +
+            currentSong
+        );
+
+
+    if (active) {
+
+        active.classList.add(
+            "active"
+        );
+
+    }
+
+}
+
+
+
+/*
+====================================================
+VOLUME
+====================================================
+*/
+
+
+document
+    .getElementById("volume")
+    .addEventListener(
+        "input",
+        function() {
+
+
+            if (player) {
+
+
+                player.setVolume(
+                    this.value
+                );
+
+
+            }
+
+        }
+    );
+
+
+
+/*
+====================================================
+START
+====================================================
+*/
+
+
+createTrackList();
+
+</script>
+
+
+</body>
+</html>
