@@ -1,1484 +1,1150 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>RAFMUSIC</title>
+<title>RAFFET | FIRKAAN</title>
 
 <style>
-
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at top, #292929 0%, #111 45%, #080808 100%);
-    color: #fff;
-    min-height: 100vh;
+    margin: 0;
+    background: #f4f4f4;
+    color: #171717;
+    font-family: Arial, sans-serif;
 }
 
-/* =========================
-   HEADER
-========================= */
-
-header {
-    width: 100%;
-    padding: 22px 6%;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    border-bottom: 1px solid rgba(255,255,255,.08);
-
-    background: rgba(10,10,10,.75);
-
-    backdrop-filter: blur(15px);
-
-    position: sticky;
-    top: 0;
-
-    z-index: 100;
-}
-
-.logo {
-    font-size: 25px;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-
-.logo span {
-    color: #c9a227;
-}
-
-nav {
-    display: flex;
-    gap: 30px;
-}
-
-nav a {
-    color: #ccc;
-    text-decoration: none;
-    transition: .3s;
-}
-
-nav a:hover {
-    color: #c9a227;
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-    min-height: 75vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 60px 20px;
-}
-
-.hero-content {
-    width: 100%;
-    max-width: 1100px;
-
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 60px;
-
-    align-items: center;
-}
-
-
-/* =========================
-   ALBUM
-========================= */
-
-.album {
-    display: flex;
-    justify-content: center;
-}
-
-.album-cover {
-    width: min(430px, 80vw);
-
-    aspect-ratio: 1 / 1;
-
-    border-radius: 20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(201,162,39,.9),
-            rgba(60,40,5,.8)
-        );
-
-    box-shadow:
-        0 30px 70px rgba(0,0,0,.7),
-        inset 0 0 60px rgba(255,255,255,.05);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    position: relative;
-
-    overflow: hidden;
-}
-
-.album-cover::before {
-
-    content: "";
-
-    width: 65%;
-    height: 65%;
-
-    border-radius: 50%;
-
-    background:
-        repeating-radial-gradient(
-            circle,
-            #111 0px,
-            #111 3px,
-            #222 4px,
-            #111 7px
-        );
-
-    box-shadow:
-        0 0 30px rgba(0,0,0,.8);
-
-    animation:
-        rotate 10s linear infinite;
-}
-
-.album-center {
-
-    position: absolute;
-
-    width: 80px;
-    height: 80px;
-
-    background: #c9a227;
-
-    border-radius: 50%;
-
-    border: 10px solid #111;
-}
-
-@keyframes rotate {
-
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-
-}
-
-
-/* =========================
-   TEXT
-========================= */
-
-.hero-text h1 {
-
-    font-family: Georgia, serif;
-
-    font-size:
-        clamp(45px, 6vw, 80px);
-
-    margin-bottom: 15px;
-}
-
-.hero-text h1 span {
-
-    color: #c9a227;
-}
-
-.subtitle {
-
-    color: #aaa;
-
-    font-size: 18px;
-
-    line-height: 1.7;
-
-    margin-bottom: 30px;
-}
-
-
-/* =========================
-   PLAYER
-========================= */
-
-.player {
-
-    background:
-        rgba(255,255,255,.05);
-
-    border:
-        1px solid rgba(255,255,255,.1);
-
-    border-radius: 18px;
-
+.container {
+    max-width: 950px;
+    margin: auto;
     padding: 20px;
-
-    backdrop-filter: blur(15px);
 }
 
-.current-song {
-
+.header {
+    background: #111;
+    color: white;
+    padding: 28px;
+    border-radius: 14px;
     margin-bottom: 18px;
 }
 
-.current-song h3 {
-
-    font-size: 19px;
-
-    margin-bottom: 5px;
+.logo {
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 4px;
 }
 
-.current-song p {
-
-    color: #999;
-
-    font-size: 14px;
+.header p {
+    color: #aaa;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 2px;
 }
 
-
-/* =========================
-   CONTROLS
-========================= */
-
-.controls {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-}
-
-.control-btn {
-
-    width: 45px;
-    height: 45px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: #292929;
-
-    color: white;
-
-    cursor: pointer;
-
-    font-size: 18px;
-
-    transition: .25s;
-}
-
-.control-btn:hover {
-
-    background: #c9a227;
-
-    color: #111;
-
-    transform: scale(1.06);
-}
-
-.play-btn {
-
-    width: 58px;
-    height: 58px;
-
-    background: #c9a227;
-
-    color: #111;
-
-    font-size: 22px;
-}
-
-.play-btn:hover {
-
-    background: #e1bd45;
-}
-
-
-/* =========================
-   VOLUME
-========================= */
-
-.volume {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    margin-left: auto;
-}
-
-.volume input {
-
-    width: 90px;
-
-    accent-color: #c9a227;
-}
-
-
-/* =========================
-   MUSIC SECTION
-========================= */
-
-.music-section {
-
-    max-width: 1100px;
-
-    margin: auto;
-
-    padding: 70px 20px;
-}
-
-.section-title {
-
-    font-family: Georgia, serif;
-
-    font-size: 38px;
-
-    margin-bottom: 30px;
-}
-
-.section-title span {
-
-    color: #c9a227;
-}
-
-
-/* =========================
-   TRACK LIST
-========================= */
-
-.track-list {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 12px;
-}
-
-.track {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
-
-    padding: 17px;
-
-    background:
-        rgba(255,255,255,.04);
-
-    border:
-        1px solid rgba(255,255,255,.06);
-
+.card {
+    background: white;
+    border: 1px solid #e5e5e5;
     border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
 
+.profile {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.profile h2 {
+    margin-top: 0;
+}
+
+.profile p {
+    color: #666;
+    margin: 9px 0;
+}
+
+.profile-badge {
+    border: 1px solid #444;
+    padding: 12px 16px;
+    border-radius: 9px;
+    height: fit-content;
+    font-size: 12px;
+}
+
+.month-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.month-control button {
+    background: #111;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 20px;
     cursor: pointer;
-
-    transition: .3s;
 }
 
-.track:hover {
-
-    background:
-        rgba(201,162,39,.1);
-
-    border-color:
-        rgba(201,162,39,.35);
-
-    transform:
-        translateX(5px);
-}
-
-.track.active {
-
-    background:
-        rgba(201,162,39,.12);
-
-    border-color:
-        rgba(201,162,39,.5);
-}
-
-.track-number {
-
-    width: 35px;
-
-    color: #777;
-
+#monthTitle {
+    font-size: 20px;
+    font-weight: bold;
     text-align: center;
 }
 
-.track-info {
-
-    flex: 1;
-}
-
-.track-info h3 {
-
+input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     font-size: 16px;
-
-    margin-bottom: 5px;
+    width: 145px;
 }
 
-.track-info p {
+.rate-row, .advance-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
 
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.stat {
+    background: #111;
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.stat span {
+    display: block;
+    color: #aaa;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.stat strong {
+    font-size: 23px;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+}
+
+.weekday {
+    text-align: center;
+    padding: 10px 0;
+    font-size: 12px;
+    color: #777;
+    font-weight: bold;
+}
+
+.day {
+    min-width: 0;
+    min-height: 75px;
+    background: #f3f3f3;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.day strong {
+    font-size: 17px;
+}
+
+.day small {
+    font-size: 10px;
+}
+
+.day.work {
+    background: #171717;
+    color: white;
+    border-color: #171717;
+}
+
+.day.off {
+    background: #e5e5e5;
+    color: #333;
+    border-color: #aaa;
+}
+
+.day.sick {
+    background: white;
+    border: 2px dashed #777;
+}
+
+.day.today {
+    outline: 2px solid #777;
+    outline-offset: 2px;
+}
+
+.day:active {
+    transform: scale(.96);
+}
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 12px;
+    color: #666;
+    margin-top: 16px;
+}
+
+.legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    background: #111;
+}
+
+.dot.off {
+    background: #aaa;
+}
+
+.dot.sick {
+    background: white;
+    border: 1px solid #777;
+}
+
+.dot.empty {
+    background: #eee;
+    border: 1px solid #ccc;
+}
+
+.action {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    border: 1px solid #111;
+    border-radius: 8px;
+    background: #111;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.action.light {
+    background: white;
+    color: #111;
+}
+
+.action.danger {
+    background: white;
+    color: #b22;
+    border-color: #b22;
+}
+
+.action:hover {
+    opacity: .8;
+}
+
+.hint {
+    font-size: 12px;
     color: #888;
-
-    font-size: 13px;
+    line-height: 1.5;
 }
 
-.track-play {
-
-    color: #c9a227;
-
-    font-size: 20px;
+.result {
+    display: flex;
+    justify-content: space-between;
+    margin: 14px 0;
+    gap: 10px;
 }
 
-
-/* =========================
-   YOUTUBE
-========================= */
-
-.youtube-container {
-
-    position: fixed;
-
-    width: 1px;
-    height: 1px;
-
-    left: -100px;
-    top: -100px;
-
-    opacity: 0;
-
-    pointer-events: none;
+.result strong {
+    text-align: right;
 }
 
-
-/* =========================
-   FOOTER
-========================= */
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 18px 0;
+}
 
 footer {
-
     text-align: center;
-
-    padding: 40px 20px;
-
-    border-top:
-        1px solid rgba(255,255,255,.08);
-
-    color: #666;
-
-    margin-top: 50px;
+    color: #999;
+    padding: 20px;
+    font-size: 12px;
 }
 
-footer span {
-
-    color: #c9a227;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 800px) {
-
-    header {
-
-        padding: 18px 20px;
+@media(max-width: 500px) {
+    .container {
+        padding: 12px;
     }
 
-    nav {
-
-        display: none;
+    .header {
+        padding: 20px;
     }
 
-    .hero {
-
-        min-height: auto;
-
-        padding:
-            40px 20px 60px;
+    .card {
+        padding: 14px;
     }
 
-    .hero-content {
-
-        grid-template-columns: 1fr;
-
-        gap: 35px;
-
-        text-align: center;
+    .day {
+        min-height: 60px;
     }
 
-    .album-cover {
-
-        width: 300px;
+    .day small {
+        font-size: 9px;
     }
 
-    .hero-text h1 {
-
-        font-size: 48px;
+    .day strong {
+        font-size: 15px;
     }
 
-    .subtitle {
+    .stat {
+        padding: 14px;
+    }
 
+    .stat strong {
+        font-size: 19px;
+    }
+
+    #monthTitle {
         font-size: 16px;
     }
-
-    .controls {
-
-        justify-content: center;
-    }
-
-    .volume {
-
-        display: none;
-    }
-
-    .music-section {
-
-        padding:
-            50px 15px;
-    }
-
-    .section-title {
-
-        font-size: 32px;
-    }
-
-    .track {
-
-        padding:
-            15px 12px;
-    }
-
-    .track-number {
-
-        width: 25px;
-    }
-
 }
-
-
-/* =========================
-   SMALL PHONE
-========================= */
-
-@media (max-width: 420px) {
-
-    .logo {
-
-        font-size: 20px;
-    }
-
-    .album-cover {
-
-        width: 260px;
-    }
-
-    .hero-text h1 {
-
-        font-size: 40px;
-    }
-
-    .player {
-
-        padding: 15px;
-    }
-
-}
-
 </style>
 </head>
 
-
 <body>
 
+<div class="container">
 
-<!-- =========================
-     HEADER
-========================= -->
+    <header class="header">
+        <div class="logo">RAFFET.</div>
+        <p>PERSONAL WORK & SALARY TRACKER</p>
+    </header>
 
-<header>
+    <!-- ПРОФИЛЬ -->
 
-    <div class="logo">
-
-        RAF<span>MUSIC</span>
-
-    </div>
-
-
-    <nav>
-
-        <a href="#home">
-            Главная
-        </a>
-
-        <a href="#music">
-            Музыка
-        </a>
-
-        <a href="#about">
-            О сайте
-        </a>
-
-    </nav>
-
-</header>
-
-
-
-<!-- =========================
-     HERO
-========================= -->
-
-<section
-    class="hero"
-    id="home">
-
-    <div class="hero-content">
-
-
-        <div class="album">
-
-            <div class="album-cover">
-
-                <div class="album-center"></div>
-
+    <div class="card">
+        <div class="profile">
+            <div>
+                <h2>Рафет</h2>
+                <p>🏪 Место работы: <b>Firkaan</b></p>
+                <p>👤 Должность: Продавец</p>
+                <p>🍷 Отдел: Вино, водка и другие товары</p>
+                <p>💰 Оплата: 7 100 ₸ / день</p>
             </div>
 
+            <div class="profile-badge">
+                PERSONAL ACCOUNT
+            </div>
         </div>
+    </div>
 
+    <!-- ВЫБОР МЕСЯЦА -->
 
+    <div class="card">
+        <div class="month-control">
+            <button onclick="changeMonth(-1)">←</button>
+            <div id="monthTitle"></div>
+            <button onclick="changeMonth(1)">→</button>
+        </div>
+    </div>
 
-        <div class="hero-text">
+    <!-- ДНЕВНАЯ ОПЛАТА -->
 
-            <h1>
-
-                RAF<span>MUSIC</span>
-
-            </h1>
-
-
-            <p class="subtitle">
-
-                Твоя музыка.
-                Твоё настроение.
-                Твой RAFMUSIC.
-
-            </p>
-
-
-
-            <!-- PLAYER -->
-
-            <div class="player">
-
-
-                <div class="current-song">
-
-                    <h3 id="songTitle">
-
-                        Выберите композицию
-
-                    </h3>
-
-
-                    <p id="songArtist">
-
-                        RAFMUSIC
-
-                    </p>
-
-                </div>
-
-
-
-                <div class="controls">
-
-
-                    <button
-                        class="control-btn"
-                        onclick="previousSong()">
-
-                        ⏮
-
-                    </button>
-
-
-
-                    <button
-                        class="control-btn play-btn"
-                        id="playButton"
-                        onclick="toggleMusic()">
-
-                        ▶
-
-                    </button>
-
-
-
-                    <button
-                        class="control-btn"
-                        onclick="nextSong()">
-
-                        ⏭
-
-                    </button>
-
-
-
-                    <div class="volume">
-
-                        🔊
-
-                        <input
-                            type="range"
-                            min="0"
-                            max="100"
-                            value="80"
-                            id="volume">
-
-                    </div>
-
-
-                </div>
-
-
+    <div class="card">
+        <div class="rate-row">
+            <div>
+                <b>Дневная зарплата</b>
+                <p class="hint">Оплата за один рабочий день</p>
             </div>
 
+            <input id="rate" type="number" min="0" value="7100">
+        </div>
+    </div>
 
+    <!-- СТАТИСТИКА -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <span>ЗАРАБОТАНО</span>
+            <strong id="earned">0 ₸</strong>
         </div>
 
+        <div class="stat">
+            <span>РАБОЧИЕ ДНИ</span>
+            <strong id="work">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>ВЫХОДНЫЕ</span>
+            <strong id="off">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>БОЛЬНИЧНЫЕ</span>
+            <strong id="sick">0</strong>
+        </div>
 
     </div>
 
-</section>
+    <!-- КАЛЕНДАРЬ -->
 
+    <div class="card" style="margin-top:16px">
 
+        <h3>📅 Календарь работы</h3>
 
-<!-- =========================
-     MUSIC
-========================= -->
+        <p class="hint">
+            Нажимай на любую дату, чтобы изменить статус.
+        </p>
 
-<section
-    class="music-section"
-    id="music">
+        <div class="calendar" id="calendar"></div>
 
+        <div class="legend">
+            <span><i class="dot"></i> Работа</span>
+            <span><i class="dot off"></i> Выходной</span>
+            <span><i class="dot sick"></i> Больничный</span>
+            <span><i class="dot empty"></i> Не отмечено</span>
+        </div>
 
-    <h2 class="section-title">
-
-        Мой <span>плейлист</span>
-
-    </h2>
-
-
-
-    <div
-        class="track-list"
-        id="trackList">
-
+        <p class="hint">
+            Работа → Выходной → Больничный → Не отмечено.
+        </p>
 
     </div>
 
+    <!-- ВЫПЛАТЫ -->
 
-</section>
+    <div class="card">
 
+        <h3>💳 Мои выплаты</h3>
 
+        <div class="advance-row">
+            <div>
+                <b>Полученный аванс</b>
+                <p class="hint">Укажи сумму, которую уже получил</p>
+            </div>
 
-<!-- =========================
-     ABOUT
-========================= -->
+            <input id="advance" type="number" min="0" value="0">
+        </div>
 
-<section
-    class="music-section"
-    id="about">
+        <hr>
 
+        <div class="result">
+            Остаток зарплаты:
+            <strong id="remaining">0 ₸</strong>
+        </div>
 
-    <h2 class="section-title">
+        <div class="result">
+            Всего заработано:
+            <strong id="totalEarned">0 ₸</strong>
+        </div>
 
-        О <span>RAFMUSIC</span>
+    </div>
 
-    </h2>
+    <!-- ИТОГ -->
 
+    <div class="card">
 
-    <p class="subtitle">
+        <h3>📊 Статистика месяца</h3>
 
-        Добро пожаловать на RAFMUSIC —
-        персональный музыкальный сайт.
+        <div class="result">
+            Всего дней:
+            <strong id="total">0</strong>
+        </div>
 
-        Выбирай любимую композицию,
-        нажимай Play и слушай музыку.
+        <div class="result">
+            Отмечено дней:
+            <strong id="marked">0</strong>
+        </div>
 
-        Музыкальные видео воспроизводятся
-        через YouTube.
+        <div class="result">
+            Осталось отметить:
+            <strong id="unmarked">0</strong>
+        </div>
 
-    </p>
+        <div class="result">
+            Потенциальный заработок:
+            <strong id="potential">0 ₸</strong>
+        </div>
 
+    </div>
 
-</section>
+    <!-- ОТЧЁТЫ -->
 
+    <div class="card">
 
+        <h3>📁 Мои отчёты</h3>
 
-<!-- =========================
-     FOOTER
-========================= -->
+        <button class="action" onclick="exportExcel()">
+            📥 Скачать отчёт для Excel
+        </button>
 
-<footer>
+        <button class="action light" onclick="backup()">
+            💾 Сохранить резервную копию
+        </button>
 
-    © 2026
-    <span>RAFMUSIC</span>
+        <button class="action light" onclick="restoreFile()">
+            📂 Восстановить данные
+        </button>
 
-</footer>
+        <input
+            type="file"
+            id="restoreInput"
+            accept=".json"
+            style="display:none"
+            onchange="restore(event)"
+        >
 
+        <button class="action danger" onclick="clearMonth()">
+            Очистить текущий месяц
+        </button>
 
+        <p class="hint">
+            Сохраняй резервную копию, чтобы не потерять данные.
+        </p>
 
-<!-- =========================
-     YOUTUBE PLAYER
-========================= -->
+    </div>
 
-<div class="youtube-container">
-
-    <div id="youtubePlayer"></div>
+    <footer>
+        RAFFET © 2026<br>
+        FIRKAAN • PERSONAL WORK ACCOUNT
+    </footer>
 
 </div>
 
-
-
-<script src="https://www.youtube.com/iframe_api"></script>
-
-
 <script>
 
-/*
-====================================================
-RAFMUSIC
-СПИСОК ПЕСЕН
-====================================================
+// ==============================
+// НАСТРОЙКИ
+// ==============================
 
-Здесь ты в будущем можешь добавлять новые песни.
-
-title  = название песни
-artist = исполнитель
-id     = ID видео YouTube
-
-====================================================
-*/
-
-
-const songs = [
-
-    {
-        title: "Песня 1",
-        artist: "Исполнитель 1",
-        id: "iZFmTmEMAXM"
-    },
-
-    {
-        title: "Песня 2",
-        artist: "Исполнитель 2",
-        id: "q_wx_C3ps5U"
-    },
-
-    {
-        title: "Песня 3",
-        artist: "Исполнитель 3",
-        id: "M8HDSFhvRJE"
-    },
-
-    {
-        title: "Песня 4",
-        artist: "Исполнитель 4",
-        id: "82PsUyCKuUc"
-    },
-
-    {
-        title: "Песня 5",
-        artist: "Исполнитель 5",
-        id: "Ntzm0uhK6Ro"
-    },
-
-    {
-        title: "Песня 6",
-        artist: "Исполнитель 6",
-        id: "1T1S6aLEc0A"
-    },
-
-    {
-        title: "Песня 7",
-        artist: "Исполнитель 7",
-        id: "UoXcADETATI"
-    },
-
-    {
-        title: "Песня 8",
-        artist: "Исполнитель 8",
-        id: "SiChGVvYPRg"
-    },
-
-    {
-        title: "Песня 9",
-        artist: "Исполнитель 9",
-        id: "Acl5U6LxJOI"
-    },
-
-    {
-        title: "Песня 10",
-        artist: "Исполнитель 10",
-        id: "Y2J3tFW3Lsw"
-    },
-
-    {
-        title: "Песня 11",
-        artist: "Исполнитель 11",
-        id: "QN_vER9i57M"
-    },
-
-    {
-        title: "Песня 12",
-        artist: "Исполнитель 12",
-        id: "QzRUdsk-_rs"
-    },
-
-    {
-        title: "Песня 13",
-        artist: "Исполнитель 13",
-        id: "CG_1ygj6yUM"
-    },
-
-    {
-        title: "Песня 14",
-        artist: "Исполнитель 14",
-        id: "HanF7puZAEA"
-    },
-
-    {
-        title: "Песня 15",
-        artist: "Исполнитель 15",
-        id: "csrtsi6z3B8"
-    },
-
-    {
-        title: "Песня 16",
-        artist: "Исполнитель 16",
-        id: "dWgtUNtHvDs"
-    },
-
-    {
-        title: "Песня 17",
-        artist: "Исполнитель 17",
-        id: "SQE7BaJ8FTE"
-    },
-
-    {
-        title: "Песня 18",
-        artist: "Исполнитель 18",
-        id: "dcS0zqAS2Oo"
-    },
-
-    {
-        title: "Песня 19",
-        artist: "Исполнитель 19",
-        id: "lQQgA7wtW-c"
-    },
-
-    {
-        title: "Песня 20",
-        artist: "Исполнитель 20",
-        id: "jZSyZKAYX10"
-    }
-
+const months = [
+    "Январь", "Февраль", "Март", "Апрель",
+    "Май", "Июнь", "Июль", "Август",
+    "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
 ];
 
+const weekdays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 
+const today = new Date();
 
-/*
-====================================================
-ПЕРЕМЕННЫЕ
-====================================================
-*/
+let year = today.getFullYear();
+let month = today.getMonth();
 
+let data = {};
 
-let currentSong = 0;
+try {
+    data = JSON.parse(localStorage.getItem("raffetData") || "{}");
+} catch(e) {
+    data = {};
+}
 
-let player = null;
+let settings = {};
 
-let isPlaying = false;
+try {
+    settings = JSON.parse(localStorage.getItem("raffetSettings") || "{}");
+} catch(e) {
+    settings = {};
+}
 
+const rateInput = document.getElementById("rate");
+const advanceInput = document.getElementById("advance");
 
+rateInput.value = settings.rate ?? 7100;
 
-/*
-====================================================
-СОЗДАНИЕ СПИСКА ПЕСЕН
-====================================================
-*/
+// ==============================
+// СОХРАНЕНИЕ
+// ==============================
 
+function save() {
+    localStorage.setItem("raffetData", JSON.stringify(data));
+}
 
-function createTrackList() {
+function saveSettings() {
+    settings.rate = Number(rateInput.value) || 0;
 
-    const list =
-        document.getElementById(
-            "trackList"
-        );
-
-
-    list.innerHTML = "";
-
-
-    songs.forEach(
-        function(song, index) {
-
-
-            const track =
-                document.createElement(
-                    "div"
-                );
-
-
-            track.className =
-                "track";
-
-
-            track.id =
-                "track-" + index;
-
-
-            track.onclick =
-                function() {
-
-                    selectSong(index);
-
-                };
-
-
-            track.innerHTML = `
-
-                <div class="track-number">
-
-                    ${String(index + 1).padStart(2, "0")}
-
-                </div>
-
-
-                <div class="track-info">
-
-                    <h3>
-
-                        ${song.title}
-
-                    </h3>
-
-
-                    <p>
-
-                        ${song.artist}
-
-                    </p>
-
-                </div>
-
-
-                <div class="track-play">
-
-                    ▶
-
-                </div>
-
-            `;
-
-
-            list.appendChild(track);
-
-        }
+    localStorage.setItem(
+        "raffetSettings",
+        JSON.stringify(settings)
     );
+}
+
+function key() {
+    return year + "-" + String(month + 1).padStart(2, "0");
+}
+
+function getMonth() {
+    if (!data[key()]) {
+        data[key()] = {
+            days: {},
+            advance: 0
+        };
+    }
+
+    if (!data[key()].days) {
+        data[key()].days = {};
+    }
+
+    return data[key()];
+}
+
+function money(number) {
+    return new Intl.NumberFormat("ru-RU").format(number) + " ₸";
+}
+
+// ==============================
+// СТАТУС ДНЯ
+// ==============================
+
+function status(day) {
+    return getMonth().days[day] || "";
+}
+
+function changeDay(day) {
+
+    const statuses = ["work", "off", "sick", ""];
+
+    const current = status(day);
+
+    const index = statuses.indexOf(current);
+
+    const next = statuses[(index + 1) % statuses.length];
+
+    getMonth().days[day] = next;
+
+    save();
+
+    render();
+}
+
+// ==============================
+// ПЕРЕКЛЮЧЕНИЕ МЕСЯЦА
+// ==============================
+
+function changeMonth(value) {
+
+    month += value;
+
+    if (month < 0) {
+        month = 11;
+        year--;
+    }
+
+    if (month > 11) {
+        month = 0;
+        year++;
+    }
+
+    render();
+}
+
+// ==============================
+// ГЛАВНЫЙ КАЛЕНДАРЬ
+// ==============================
+
+function render() {
+
+    document.getElementById("monthTitle").textContent =
+        months[month] + " " + year;
+
+    const calendar = document.getElementById("calendar");
+
+    calendar.innerHTML = "";
+
+    // Заголовки дней недели
+
+    weekdays.forEach(name => {
+
+        const el = document.createElement("div");
+
+        el.className = "weekday";
+
+        el.textContent = name;
+
+        calendar.appendChild(el);
+
+    });
+
+    // Первый день месяца
+
+    const firstDay =
+        (new Date(year, month, 1).getDay() + 6) % 7;
+
+    // Количество дней
+
+    const total =
+        new Date(year, month + 1, 0).getDate();
+
+    // Пустые клетки перед первым числом
+
+    for (let i = 0; i < firstDay; i++) {
+
+        const empty = document.createElement("div");
+
+        calendar.appendChild(empty);
+
+    }
+
+    let work = 0;
+    let off = 0;
+    let sick = 0;
+    let marked = 0;
+
+    // Создание чисел календаря
+
+    for (let d = 1; d <= total; d++) {
+
+        const s = status(d);
+
+        const el = document.createElement("div");
+
+        el.className = "day";
+
+        if (
+            today.getFullYear() === year &&
+            today.getMonth() === month &&
+            today.getDate() === d
+        ) {
+            el.classList.add("today");
+        }
+
+        const labels = {
+            work: "Работа",
+            off: "Выходной",
+            sick: "Больничный",
+            "": "—"
+        };
+
+        if (s === "work") {
+            work++;
+            el.classList.add("work");
+        }
+
+        if (s === "off") {
+            off++;
+            el.classList.add("off");
+        }
+
+        if (s === "sick") {
+            sick++;
+            el.classList.add("sick");
+        }
+
+        if (s !== "") {
+            marked++;
+        }
+
+        const number = document.createElement("strong");
+
+        number.textContent = d;
+
+        const label = document.createElement("small");
+
+        label.textContent = labels[s];
+
+        el.appendChild(number);
+
+        el.appendChild(label);
+
+        el.onclick = function() {
+            changeDay(d);
+        };
+
+        calendar.appendChild(el);
+
+    }
+
+    // ==============================
+    // РАСЧЁТ ЗАРПЛАТЫ
+    // ==============================
+
+    const rate = Math.max(0, Number(rateInput.value) || 0);
+
+    const advance = getMonth().advance || 0;
+
+    const earned = work * rate;
+
+    document.getElementById("earned").textContent =
+        money(earned);
+
+    document.getElementById("totalEarned").textContent =
+        money(earned);
+
+    document.getElementById("work").textContent = work;
+
+    document.getElementById("off").textContent = off;
+
+    document.getElementById("sick").textContent = sick;
+
+    document.getElementById("remaining").textContent =
+        money(earned - advance);
+
+    document.getElementById("total").textContent = total;
+
+    document.getElementById("marked").textContent = marked;
+
+    document.getElementById("unmarked").textContent =
+        total - marked;
+
+    document.getElementById("potential").textContent =
+        money((work + (total - marked)) * rate);
+
+    advanceInput.value = advance;
+
+    saveSettings();
 
 }
 
+// ==============================
+// ИЗМЕНЕНИЕ ЗАРПЛАТЫ
+// ==============================
 
+rateInput.addEventListener("input", function() {
+    render();
+});
 
-/*
-====================================================
-YOUTUBE API
-====================================================
-*/
+// ==============================
+// АВАНС
+// ==============================
 
+advanceInput.addEventListener("input", function() {
 
-function onYouTubeIframeAPIReady() {
+    getMonth().advance =
+        Math.max(0, Number(advanceInput.value) || 0);
 
+    save();
 
-    player =
-        new YT.Player(
-            "youtubePlayer",
-            {
+    render();
 
-                height: "1",
+});
 
-                width: "1",
+// ==============================
+// ОЧИСТКА МЕСЯЦА
+// ==============================
 
-                videoId:
-                    songs[0].id,
+function clearMonth() {
 
-                playerVars: {
-
-                    autoplay: 0,
-
-                    controls: 0,
-
-                    rel: 0,
-
-                    modestbranding: 1,
-
-                    playsinline: 1
-
-                },
-
-
-                events: {
-
-                    onStateChange:
-                        onPlayerStateChange
-
-                }
-
-            }
-        );
-
-}
-
-
-
-/*
-====================================================
-PLAY / PAUSE
-====================================================
-*/
-
-
-function toggleMusic() {
-
-
-    if (!player) {
-
+    if (!confirm("Удалить отметки и аванс за этот месяц?")) {
         return;
-
     }
 
+    delete data[key()];
 
-    if (isPlaying) {
+    save();
 
-        player.pauseVideo();
-
-    }
-
-    else {
-
-        player.playVideo();
-
-    }
+    render();
 
 }
 
+// ==============================
+// ЭКСПОРТ EXCEL
+// ==============================
 
+function exportExcel() {
 
-/*
-====================================================
-PLAYER STATE
-====================================================
-*/
+    const total =
+        new Date(year, month + 1, 0).getDate();
 
+    const rate = Number(rateInput.value) || 0;
 
-function onPlayerStateChange(event) {
+    let rows = "";
 
+    let work = 0;
+    let off = 0;
+    let sick = 0;
 
-    if (
-        event.data ===
-        YT.PlayerState.PLAYING
-    ) {
+    for (let d = 1; d <= total; d++) {
 
+        const s = status(d);
 
-        isPlaying = true;
+        const labels = {
+            work: "Работа",
+            off: "Выходной",
+            sick: "Больничный",
+            "": "Не отмечено"
+        };
 
+        const amount = s === "work" ? rate : 0;
 
-        document
-            .getElementById(
-                "playButton"
-            )
-            .textContent = "⏸";
+        if (s === "work") work++;
+        if (s === "off") off++;
+        if (s === "sick") sick++;
 
+        const date =
+            String(d).padStart(2, "0") + "." +
+            String(month + 1).padStart(2, "0") + "." +
+            year;
 
-        updateActiveTrack();
-
-
+        rows += `
+            <tr>
+                <td>${date}</td>
+                <td>${labels[s]}</td>
+                <td>${amount}</td>
+            </tr>
+        `;
     }
 
-
-    else if (
-        event.data ===
-        YT.PlayerState.ENDED
-    ) {
-
-
-        isPlaying = false;
-
-
-        nextSong();
-
-
-    }
-
-
-    else {
-
-
-        isPlaying = false;
-
-
-        document
-            .getElementById(
-                "playButton"
-            )
-            .textContent = "▶";
-
-    }
-
-}
-
-
-
-/*
-====================================================
-SELECT SONG
-====================================================
-*/
-
-
-function selectSong(index) {
-
-
-    currentSong = index;
-
-
-    const song =
-        songs[currentSong];
-
-
-    document
-        .getElementById(
-            "songTitle"
-        )
-        .textContent =
-            song.title;
-
-
-    document
-        .getElementById(
-            "songArtist"
-        )
-        .textContent =
-            song.artist;
-
-
-    updateActiveTrack();
-
-
-    if (player) {
-
-
-        player.loadVideoById(
-            song.id
-        );
-
-
-        player.playVideo();
-
-
-    }
-
-}
-
-
-
-/*
-====================================================
-NEXT
-====================================================
-*/
-
-
-function nextSong() {
-
-
-    currentSong++;
-
-
-    if (
-        currentSong >=
-        songs.length
-    ) {
-
-        currentSong = 0;
-
-    }
-
-
-    selectSong(
-        currentSong
-    );
-
-}
-
-
-
-/*
-====================================================
-PREVIOUS
-====================================================
-*/
-
-
-function previousSong() {
-
-
-    currentSong--;
-
-
-    if (
-        currentSong < 0
-    ) {
-
-        currentSong =
-            songs.length - 1;
-
-    }
-
-
-    selectSong(
-        currentSong
-    );
-
-}
-
-
-
-/*
-====================================================
-ACTIVE TRACK
-====================================================
-*/
-
-
-function updateActiveTrack() {
-
-
-    document
-        .querySelectorAll(
-            ".track"
-        )
-        .forEach(
-            function(track) {
-
-                track.classList.remove(
-                    "active"
-                );
-
-            }
-        );
-
-
-    const active =
-        document.getElementById(
-            "track-" +
-            currentSong
-        );
-
-
-    if (active) {
-
-        active.classList.add(
-            "active"
-        );
-
-    }
-
-}
-
-
-
-/*
-====================================================
-VOLUME
-====================================================
-*/
-
-
-document
-    .getElementById("volume")
-    .addEventListener(
-        "input",
-        function() {
-
-
-            if (player) {
-
-
-                player.setVolume(
-                    this.value
-                );
-
-
-            }
-
+    const earned = work * rate;
+
+    const advance = getMonth().advance || 0;
+
+    const excel = `
+    <html>
+    <head>
+    <meta charset="UTF-8">
+
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid #999;
+            padding: 10px;
+        }
+
+        th {
+            background: #222;
+            color: white;
+        }
+
+        .total {
+            background: #eee;
+            font-weight: bold;
+        }
+
+        col.date {
+            width: 130px;
+        }
+
+        col.status {
+            width: 170px;
+        }
+
+        col.money {
+            width: 150px;
+        }
+    </style>
+    </head>
+
+    <body>
+
+    <h2>RAFFET | FIRKAAN</h2>
+
+    <h3>Отчёт за ${months[month]} ${year}</h3>
+
+    <p>Сотрудник: Рафет</p>
+    <p>Должность: Продавец</p>
+    <p>Дневная оплата: ${rate} тенге</p>
+
+    <table>
+        <colgroup>
+            <col class="date">
+            <col class="status">
+            <col class="money">
+        </colgroup>
+
+        <tr>
+            <th>Дата</th>
+            <th>Статус</th>
+            <th>Заработок (₸)</th>
+        </tr>
+
+        ${rows}
+
+        <tr class="total">
+            <td colspan="2">ИТОГО ЗАРАБОТАНО</td>
+            <td>${earned}</td>
+        </tr>
+
+        <tr class="total">
+            <td colspan="2">АВАНС</td>
+            <td>${advance}</td>
+        </tr>
+
+        <tr class="total">
+            <td colspan="2">ОСТАТОК</td>
+            <td>${earned - advance}</td>
+        </tr>
+    </table>
+
+    <br>
+
+    Рабочих дней: ${work}<br>
+    Выходных: ${off}<br>
+    Больничных: ${sick}
+
+    </body>
+    </html>
+    `;
+
+    const blob = new Blob(
+        ["\ufeff", excel],
+        {
+            type: "application/vnd.ms-excel;charset=utf-8"
         }
     );
 
+    const url = URL.createObjectURL(blob);
 
+    const a = document.createElement("a");
 
-/*
-====================================================
-START
-====================================================
-*/
+    a.href = url;
 
+    a.download =
+        "RAFFET_FIRKAAN_" + key() + ".xls";
 
-createTrackList();
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+    URL.revokeObjectURL(url);
+
+}
+
+// ==============================
+// РЕЗЕРВНАЯ КОПИЯ
+// ==============================
+
+function backup() {
+
+    const backupData = {
+        name: "RAFFET FIRKAAN",
+        version: 1,
+        data: data,
+        settings: settings
+    };
+
+    const blob = new Blob(
+        [JSON.stringify(backupData, null, 2)],
+        {
+            type: "application/json"
+        }
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+
+    a.download = "RAFFET_BACKUP.json";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+    URL.revokeObjectURL(url);
+
+}
+
+// ==============================
+// ВОССТАНОВЛЕНИЕ
+// ==============================
+
+function restoreFile() {
+
+    document.getElementById("restoreInput").click();
+
+}
+
+function restore(event) {
+
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function() {
+
+        try {
+
+            const obj = JSON.parse(reader.result);
+
+            if (!obj.data) {
+                throw new Error("Неверный файл");
+            }
+
+            if (!confirm("Заменить текущие данные резервной копией?")) {
+                return;
+            }
+
+            data = obj.data;
+
+            settings = obj.settings || {};
+
+            save();
+
+            localStorage.setItem(
+                "raffetSettings",
+                JSON.stringify(settings)
+            );
+
+            rateInput.value = settings.rate ?? 7100;
+
+            render();
+
+            alert("Данные успешно восстановлены!");
+
+        } catch(error) {
+
+            alert("Ошибка файла. Выбери правильную резервную копию.");
+
+        }
+
+        event.target.value = "";
+
+    };
+
+    reader.readAsText(file);
+
+}
+
+// ==============================
+// ЗАПУСК САЙТА
+// ==============================
+
+render();
 
 </script>
 
-
 </body>
 </html>
+```
